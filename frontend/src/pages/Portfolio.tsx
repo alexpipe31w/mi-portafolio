@@ -30,7 +30,7 @@
         description:
         "Personal website to showcase projects and skills. Built with React, Vite, and TailwindCSS.",
         tech: ["React", "Vite", "TailwindCSS"],
-        link: "alex-rodriguez-portfol.vercel.app",
+        link: "https://alex-rodriguez-portfol.vercel.app/",
     },
     ];
 
