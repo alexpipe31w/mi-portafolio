@@ -6,7 +6,9 @@ import avatar from "../assets/avatar.webp";
 
 const Sidebar: FC = () => {
   return (
-    <aside className="w-72 bg-gray-700 text-white flex flex-col items-center p-6 space-y-6 mx-4 my-4 rounded-lg shadow-lg">
+    <aside className="w-full md:w-72 bg-gray-700 text-white flex flex-col items-center p-6 space-y-6 
+                  rounded-none md:rounded-lg shadow-lg md:mx-4 md:my-4">
+
       {/* Foto */}
       <img
         src={avatar}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"; 
 import Sidebar from "./components/Sidebar";
 import Layout from "./components/Layout";
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-white md:gap-x-6">
       {/* Sidebar */}
-      <div className="w-full md:w-72">
+      <div className="w-full md:w-72 md:ml-0">
         <Sidebar />
       </div>
 
