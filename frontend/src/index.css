@@ -1,8 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* 👉 debajo de esto puedes poner tus estilos personalizados */
-body {
-  @apply bg-gray-900 text-white;
-}
+/* opcional: dark por clase */
+@custom-variant dark (&:where(.dark, .dark *));
+
+html { color-scheme: light dark; }
+body { @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white; }
