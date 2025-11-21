@@ -25,7 +25,30 @@ import { useState } from "react";
 
     return (
         <section className="p-10 border border-gray-700 rounded-lg bg-gray-700 text-white">
-        <h1 className="text-3xl font-bold mb-6">📩 Contact Me</h1>
+    <h1 className="text-3xl font-bold mb-6 flex items-center gap-3 justify-center md:justify-start">
+    <svg
+        className="w-8 h-8 md:w-9 md:h-9"
+        viewBox="0 0 24 24"
+        fill="none"
+    >
+        <path
+        d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z"
+        fill="url(#contactGradient)"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        />
+        <defs>
+        <linearGradient id="contactGradient" x1="3" y1="5" x2="21" y2="19">
+            <stop stopColor="#3b82f6" />
+            <stop offset="1" stopColor="#6366f1" />
+        </linearGradient>
+        </defs>
+    </svg>
+    Contact Me
+    </h1>
+
 
         {/* Google Maps */}
         <div className="mb-8">

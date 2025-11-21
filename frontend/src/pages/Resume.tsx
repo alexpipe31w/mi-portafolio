@@ -2,9 +2,38 @@
 function Resume() {
   return (
     <section className="p-6 md:p-10 border border-gray-700 rounded-lg bg-gray-700 text-white">
-      <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center md:text-left">
-        📚 Resume
-      </h1>
+<h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center md:text-left flex items-center gap-3 justify-center md:justify-start">
+  <svg
+    className="w-7 h-7 md:w-8 md:h-8"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <circle
+      cx="12"
+      cy="8"
+      r="4"
+      fill="url(#profileGradient)"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21"
+      fill="url(#profileGradient)"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <defs>
+      <linearGradient id="profileGradient" x1="6" y1="4" x2="18" y2="21">
+        <stop stopColor="#3b82f6" />
+        <stop offset="1" stopColor="#8b5cf6" />
+      </linearGradient>
+    </defs>
+  </svg>
+  Resume
+</h1>
+
 
       {/* Educación */}
       <div className="mb-8 md:mb-12">

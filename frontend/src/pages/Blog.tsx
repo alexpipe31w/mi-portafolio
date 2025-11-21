@@ -27,6 +27,15 @@ const events = [
         link: "https://www.facebook.com/share/p/19wLgSpHPR/?mibextid=wwXIfr",
         image: "/images/hackathon-nov.png",
     },
+        {
+    title: "University Science & Technology Fair",
+    date: "Oct 16, 2024",
+    location: "Oasis Plaza Mall, Neiva, Huila",
+    description:
+        "Participation in the Huila University Fair of Science, Technology and Innovation. Showcased innovative projects and connected with students, entrepreneurs, and tech professionals from the region.",
+    link: "https://www.facebook.com/share/p/1RhWT6maro/?mibextid=wwXIfr", 
+    image: "/images/feriatec.jpeg",
+    },
     {
         title: "Tech Fairs & Electronics Projects",
         date: "2023 – 2024",
@@ -41,9 +50,31 @@ const events = [
     function Blog() {
     return (
         <section className="p-6 md:p-10 border border-gray-700 rounded-lg bg-gray-700 text-white">
-        <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left">
-            📰 Blog & Events
-        </h1>
+    <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left flex items-center gap-3 justify-center md:justify-start">
+    <svg
+        className="w-7 h-7 md:w-8 md:h-8"
+        viewBox="0 0 24 24"
+        fill="none"
+    >
+        <path
+        d="M19 20H5C3.89543 20 3 19.1046 3 18V6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6V18C21 19.1046 20.1046 20 19 20Z"
+        fill="url(#blogGradient)"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        />
+        <path d="M7 8H17M7 12H17M7 16H13" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+        <defs>
+        <linearGradient id="blogGradient" x1="3" y1="4" x2="21" y2="20">
+            <stop stopColor="#3b82f6" />
+            <stop offset="1" stopColor="#6366f1" />
+        </linearGradient>
+        </defs>
+    </svg>
+    Blog & Events
+    </h1>
+
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {events.map((event) => (
             <div
