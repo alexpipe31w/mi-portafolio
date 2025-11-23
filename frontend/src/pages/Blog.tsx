@@ -2,7 +2,7 @@
 const events = [
     {
         title: "Colombia 4.0",
-        date: "May 16–17, 2024",
+        date: "September 11–14, 2025",
         location: "Bogotá, Colombia",
         description:
         "Attended Colombia 4.0, one of the most important technology and innovation events in Latin America. Explored talks on software development, AI, and cybersecurity.",
@@ -29,7 +29,7 @@ const events = [
     },
         {
     title: "University Science & Technology Fair",
-    date: "Oct 16, 2024",
+    date: "Oct 16, 2025",
     location: "Oasis Plaza Mall, Neiva, Huila",
     description:
         "Participation in the Huila University Fair of Science, Technology and Innovation. Showcased innovative projects and connected with students, entrepreneurs, and tech professionals from the region.",
@@ -38,7 +38,7 @@ const events = [
     },
     {
         title: "Tech Fairs & Electronics Projects",
-        date: "2023 – 2024",
+        date: "2024 – 2025",
         location: "Neiva, Colombia",
         description:
         "Showcased electronic projects and prototypes at different technology fairs, applying electronics and telecommunication knowledge.",
