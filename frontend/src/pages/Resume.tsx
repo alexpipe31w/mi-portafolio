@@ -119,14 +119,13 @@ function Resume() {
               RAG agents build apps & GPTs with APIS-MCP Langchain&n8n
             </p>
           </div>
-          <div className="relative border-l-2 border-gray-600 pl-4 md:pl-6 space-y-6 md:space-y-8 text-sm md:text-base">
+          <div>
             <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-yellow-500 rounded-full border-2 border-gray-900"></div>
             <h3 className="font-bold text-base md:text-lg">IBM</h3>
             <p className="text-gray-300">
               Generative AI: Prompt Engineering
             </p>
           </div>
-          
           <div>
             <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-yellow-500 rounded-full border-2 border-gray-900"></div>
             <h3 className="font-bold text-base md:text-lg">Claseflix</h3>
