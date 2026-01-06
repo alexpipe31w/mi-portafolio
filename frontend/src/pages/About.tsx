@@ -24,20 +24,14 @@ function About() {
         {/* FRUTAZA - PROYECTO DESTACADO */}
         <div className="bg-gradient-to-br from-green-900/50 to-yellow-900/30 p-4 md:p-6 rounded-lg shadow-lg border-2 border-green-600/50 text-sm md:text-base relative overflow-hidden">
           <div className="absolute top-2 right-2 bg-green-600 text-white text-xs px-2 py-1 rounded-full font-bold">
-            ⭐ Featured
+            Featured
           </div>
-          <h3 className="font-bold text-lg mb-2 text-green-400">Frutaza E-commerce Platform</h3>
+          <h3 className="font-bold text-lg mb-2 text-green-400">E-commerce Platform</h3>
           <p className="text-gray-300">
             Full-stack e-commerce platform for Amazonian products. Built with Next.js, Shopify API integration, 
             automated TikTok content scraping with CRON jobs, AI-powered chatbot using Dialogflow, 
             and advanced parallax animations. Currently live in production serving real customers.
           </p>
-          <div className="flex flex-wrap gap-2 mt-3">
-            <span className="text-xs bg-blue-600 px-2 py-1 rounded">Next.js</span>
-            <span className="text-xs bg-purple-600 px-2 py-1 rounded">Shopify API</span>
-            <span className="text-xs bg-green-600 px-2 py-1 rounded">Node.js</span>
-            <span className="text-xs bg-yellow-600 px-2 py-1 rounded">Dialogflow</span>
-          </div>
         </div>
 
         <div className="bg-gray-800 p-4 md:p-6 rounded-lg shadow text-sm md:text-base">
