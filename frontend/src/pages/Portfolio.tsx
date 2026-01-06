@@ -2,14 +2,14 @@
 import { useState } from "react";
 
 const projects = [
-        {
-        title: "Frutaza E-commerce",
-        image: "/images/frutaza.jpeg",
-        description:
-            "Full-stack e-commerce platform for Amazonian jams. Features: Shopify integration, automated TikTok content scraping with CRON jobs, AI chatbot with Dialogflow, and responsive design with advanced parallax animations.",
-        tech: ["Next.js", "React", "Tailwind", "Shopify API", "Node.js", "Dialogflow"],
-        link: "https://www.frutaza.com.co/",
-        },
+  {
+    title: "Frutaza E-commerce",
+    image: "/images/frutaza.png",
+    description:
+      "Full-stack e-commerce platform for Amazonian jams. Features: Shopify integration, automated TikTok content scraping with CRON jobs, AI chatbot with Dialogflow, and responsive design with advanced parallax animations.",
+    tech: ["Next.js", "React", "Tailwind", "Shopify API", "Node.js", "Dialogflow"],
+    link: "https://www.frutaza.com.co/",
+  },
   {
     title: "Panel Plus Solar",
     image: "/images/panelplus.png",
@@ -83,27 +83,28 @@ function Portfolio() {
         Portfolio
       </h1>
 
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      {/* GRID MÁS ESPACIADO Y CARDS MÁS GRANDES */}
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-7xl mx-auto">
         {projects.map((project, index) => (
           <div
             key={project.title}
-            className="relative group bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer"
+            className="relative group bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer min-h-[400px] sm:min-h-[450px] md:min-h-[500px]"
             onClick={() => toggleCard(index)}
           >
-            {/* Imagen */}
+            {/* IMAGEN MÁS GRANDE */}
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-48 sm:h-56 md:h-64 object-cover transition-transform duration-300 md:group-hover:scale-105"
+              className="w-full h-64 sm:h-72 md:h-80 object-cover transition-transform duration-300 md:group-hover:scale-105"
             />
 
-            {/* Overlay: MÁS GRANDE EN MÓVIL */}
+            {/* OVERLAY CON DESCRIPCIÓN VISIBLE */}
             <div
               className={`
                 absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/98 to-black/90
-                flex flex-col justify-end items-center text-center
-                px-4 sm:px-6
-                py-6 sm:py-8
+                flex flex-col justify-center items-center text-center
+                px-6 sm:px-8
+                py-8 sm:py-10
                 transition-all duration-500 ease-out
                 ${
                   openCard === index
@@ -116,11 +117,13 @@ function Portfolio() {
               <h3 className="text-xl sm:text-2xl md:text-2xl font-bold mb-3 sm:mb-4">
                 {project.title}
               </h3>
-              <p className="text-sm sm:text-base md:text-base text-gray-300 mb-4 sm:mb-6 line-clamp-3 sm:line-clamp-4 leading-relaxed">
+              
+              {/* DESCRIPCIÓN SIN LINE-CLAMP - COMPLETA */}
+              <p className="text-sm sm:text-base md:text-base text-gray-300 mb-4 sm:mb-6 leading-relaxed max-w-lg">
                 {project.description}
               </p>
               
-              {/* Tags de tecnologías - MÁS GRANDES */}
+              {/* TAGS DE TECNOLOGÍAS */}
               <div className="flex flex-wrap gap-2 sm:gap-3 mb-5 sm:mb-6 justify-center">
                 {project.tech.map((t) => (
                   <span
@@ -132,7 +135,7 @@ function Portfolio() {
                 ))}
               </div>
               
-              {/* Botón - MÁS GRANDE */}
+              {/* BOTÓN */}
               <a
                 href={project.link}
                 target="_blank"
@@ -144,7 +147,7 @@ function Portfolio() {
               </a>
             </div>
 
-            {/* Indicador de "tap" solo en móvil */}
+            {/* INDICADOR DE TAP EN MÓVIL */}
             <div
               className={`
                 md:hidden absolute top-3 right-3 bg-white/20 backdrop-blur-sm rounded-full p-2
