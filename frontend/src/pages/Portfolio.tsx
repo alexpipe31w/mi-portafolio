@@ -83,7 +83,6 @@ function Portfolio() {
         Portfolio
       </h1>
 
-      {/* GRID MÁS ESPACIADO Y CARDS MÁS GRANDES */}
       <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-7xl mx-auto">
         {projects.map((project, index) => (
           <div
@@ -91,17 +90,20 @@ function Portfolio() {
             className="relative group bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer min-h-[400px] sm:min-h-[450px] md:min-h-[500px]"
             onClick={() => toggleCard(index)}
           >
-            {/* IMAGEN MÁS GRANDE */}
+            {/* IMAGEN - OCUPA TODA LA CARD */}
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-64 sm:h-72 md:h-80 object-cover transition-transform duration-300 md:group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-105"
             />
 
-            {/* OVERLAY CON DESCRIPCIÓN VISIBLE */}
+            {/* OVERLAY OSCURO PARA LEGIBILIDAD */}
+            <div className="absolute inset-0 bg-black/30 md:bg-black/20 md:group-hover:bg-black/40 transition-all duration-300"></div>
+
+            {/* OVERLAY CON CONTENIDO */}
             <div
               className={`
-                absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/98 to-black/90
+                absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/98 to-transparent
                 flex flex-col justify-center items-center text-center
                 px-6 sm:px-8
                 py-8 sm:py-10
@@ -118,12 +120,10 @@ function Portfolio() {
                 {project.title}
               </h3>
               
-              {/* DESCRIPCIÓN SIN LINE-CLAMP - COMPLETA */}
               <p className="text-sm sm:text-base md:text-base text-gray-300 mb-4 sm:mb-6 leading-relaxed max-w-lg">
                 {project.description}
               </p>
               
-              {/* TAGS DE TECNOLOGÍAS */}
               <div className="flex flex-wrap gap-2 sm:gap-3 mb-5 sm:mb-6 justify-center">
                 {project.tech.map((t) => (
                   <span
@@ -135,7 +135,6 @@ function Portfolio() {
                 ))}
               </div>
               
-              {/* BOTÓN */}
               <a
                 href={project.link}
                 target="_blank"
@@ -150,7 +149,7 @@ function Portfolio() {
             {/* INDICADOR DE TAP EN MÓVIL */}
             <div
               className={`
-                md:hidden absolute top-3 right-3 bg-white/20 backdrop-blur-sm rounded-full p-2
+                md:hidden absolute top-3 right-3 bg-white/20 backdrop-blur-sm rounded-full p-2 z-10
                 transition-opacity duration-300
                 ${openCard === index ? "opacity-0" : "opacity-100"}
               `}
