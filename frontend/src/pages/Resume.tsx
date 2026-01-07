@@ -137,52 +137,68 @@ function Resume() {
       </div>
 
       {/* Experiencia */}
-      <div>
-        <h2 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-center md:text-left">
-          Experience
-        </h2>
-        <div className="relative border-l-2 border-gray-600 pl-4 md:pl-6 space-y-6 md:space-y-8 text-sm md:text-base">
+<div>
+  <h2 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-center md:text-left">
+    Experience
+  </h2>
+  <div className="relative border-l-2 border-gray-600 pl-4 md:pl-6 space-y-6 md:space-y-8 text-sm md:text-base">
 
-          <div>
-            <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
-            <h3 className="font-bold text-base md:text-lg">Developer – Panel Plus Solar</h3>
-            <p className="text-gray-400">Neiva, Colombia (Jan 2024 – Jan 2025)</p>
-            <p className="text-gray-300 mt-2">
-              Designed and developed the company’s official website with responsive design, SEO, and CMS.  
-              Implemented contact forms, social media integration, and created a simulation module for investment budget estimation.
-            </p>
-          </div>
+    <div>
+      <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
+      <h3 className="font-bold text-base md:text-lg">Freelance Full-Stack Developer – Frutaza</h3>
+      <p className="text-gray-400">Garzón, Huila, Colombia (2024 – 2025)</p>
+      <p className="text-gray-300 mt-2">
+        Designed and developed a complete e-commerce platform for Amazonian fruit products using a full-stack architecture. 
+        Implemented Next.js for server-side rendering and SEO optimization, TailwindCSS for responsive UI design, and Node.js for backend services. 
+        Integrated Shopify Storefront API for headless commerce architecture, enabling seamless product catalog management and inventory synchronization. 
+        Configured Mercado Pago payment gateway for secure transaction processing across Latin America, implementing checkout workflows and payment verification systems. 
+        Developed WhatsApp chatbot automation for customer service and order management, connecting business operations with real-time messaging capabilities.
+      </p>
+    </div>
 
-          <div>
-            <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
-            <h3 className="font-bold text-base md:text-lg">Project Leader – FlyTours</h3>
-            <p className="text-gray-400">Neiva, Colombia (Jan 2025 – Present)</p>
-            <p className="text-gray-300 mt-2">
-              Coordinating the development of a SaaS web platform for travel companies.  
-              Responsibilities include defining requirements, assigning tasks, supervising development, and integrating modules (search, selection, quotation).
-            </p>
-          </div>
+    <div>
+      <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
+      <h3 className="font-bold text-base md:text-lg">Developer – Panel Plus Solar</h3>
+      <p className="text-gray-400">Neiva, Colombia (Jan 2024 – Jan 2025)</p>
+      <p className="text-gray-300 mt-2">
+        Designed and developed the company's official website with responsive design, SEO, and CMS.  
+        Implemented contact forms, social media integration, and created a simulation module for investment budget estimation.
+      </p>
+    </div>
 
-          <div>
-            <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
-            <h3 className="font-bold text-base md:text-lg">Independent Project – Nequi Payment Automation System</h3>
-            <p className="text-gray-400">Personal Project (2025)</p>
-            <p className="text-gray-300 mt-2">
-              Development of an automated system that validates Nequi payment receipts through a chatbot.  
-              The system verifies receipts, notifies users, and stores daily transactions in a database for company accounting.
-            </p>
-          </div>
+    <div>
+      <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
+      <h3 className="font-bold text-base md:text-lg">Project Leader – FlyTours</h3>
+      <p className="text-gray-400">Neiva, Colombia (Jan 2025 – Present)</p>
+      <p className="text-gray-300 mt-2">
+        Coordinating the development of a SaaS web platform for travel companies.  
+        Responsibilities include defining requirements, assigning tasks, supervising development, and integrating modules (search, selection, quotation).
+      </p>
+    </div>
 
-          <div>
-            <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
-            <h3 className="font-bold text-base md:text-lg">Portfolio Website</h3>
-            <p className="text-gray-400">Personal Project (2025)</p>
-            <p className="text-gray-300 mt-2">
-              Designed and developed my personal portfolio website from scratch using React, Vite, 
-              TailwindCSS, and TypeScript. Includes sections such as About, Resume, Portfolio, Blog, and Contact. 
-              Showcases my projects and technical skills while applying responsive design and best coding practices.
-            </p>
-          </div>
+    <div>
+      <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
+      <h3 className="font-bold text-base md:text-lg">Independent Project – Nequi Payment Automation System</h3>
+      <p className="text-gray-400">Personal Project (2025)</p>
+      <p className="text-gray-300 mt-2">
+        Development of an automated system that validates Nequi payment receipts through a chatbot.  
+        The system verifies receipts, notifies users, and stores daily transactions in a database for company accounting.
+      </p>
+    </div>
+
+    <div>
+      <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
+      <h3 className="font-bold text-base md:text-lg">Portfolio Website</h3>
+      <p className="text-gray-400">Personal Project (2025)</p>
+      <p className="text-gray-300 mt-2">
+        Designed and developed my personal portfolio website from scratch using React, Vite, 
+        TailwindCSS, and TypeScript. Includes sections such as About, Resume, Portfolio, Blog, and Contact. 
+        Showcases my projects and technical skills while applying responsive design and best coding practices.
+      </p>
+    </div>
+  </div>
+</div>
+
 
         </div>
       </div>
