@@ -145,7 +145,7 @@ function Resume() {
           <div>
             <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
             <h3 className="font-bold text-base md:text-lg">Freelance Full-Stack Developer – Frutaza</h3>
-            <p className="text-gray-400">Garzón, Huila, Colombia (2024 – 2025)</p>
+            <p className="text-gray-400">Neiva, Huila, Colombia (Nov 2025 - Dec 2025)</p>
             <p className="text-gray-300 mt-2">
               Designed and developed a complete e-commerce platform for Amazonian fruit products using a full-stack architecture. 
               Implemented Next.js for server-side rendering and SEO optimization, TailwindCSS for responsive UI design, and Node.js for backend services. 
@@ -158,7 +158,7 @@ function Resume() {
           <div>
             <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
             <h3 className="font-bold text-base md:text-lg">Developer – Panel Plus Solar</h3>
-            <p className="text-gray-400">Neiva, Colombia (Jan 2024 – Jan 2025)</p>
+            <p className="text-gray-400">Neiva, Colombia (Jan 2024 – May 2024)</p>
             <p className="text-gray-300 mt-2">
               Designed and developed the company's official website with responsive design, SEO, and CMS.  
               Implemented contact forms, social media integration, and created a simulation module for investment budget estimation.
@@ -168,7 +168,7 @@ function Resume() {
           <div>
             <div className="absolute -left-3 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full border-2 border-gray-900"></div>
             <h3 className="font-bold text-base md:text-lg">Project Leader – FlyTours</h3>
-            <p className="text-gray-400">Neiva, Colombia (Jan 2025 – Present)</p>
+            <p className="text-gray-400">Neiva, Colombia (Jan 2025 – Jul 2025)</p>
             <p className="text-gray-300 mt-2">
               Coordinating the development of a SaaS web platform for travel companies.  
               Responsibilities include defining requirements, assigning tasks, supervising development, and integrating modules (search, selection, quotation).
