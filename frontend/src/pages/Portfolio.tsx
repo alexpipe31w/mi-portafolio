@@ -6,7 +6,7 @@ const projects = [
     title: "Frutaza E-commerce",
     image: "/images/frutaza.png",
     description:
-      "Full-stack e-commerce platform for Amazonian jams. Features: Shopify integration, automated TikTok content scraping with CRON jobs, AI chatbot with Dialogflow, and responsive design with advanced parallax animations.",
+      "Full-stack e-commerce platform. Features: Shopify integration, automated TikTok content scraping with CRON jobs, chatbot with Dialogflow, parallax animations.",
     tech: ["Next.js", "React", "Tailwind", "Shopify API", "Node.js", "Dialogflow"],
     link: "https://www.frutaza.com.co/",
   },
