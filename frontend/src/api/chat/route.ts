@@ -1,7 +1,5 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+import Groq from 'groq-sdk';
 
 const PORTFOLIO_CONTEXT = `Eres el asistente virtual de Alex Felipe Rodríguez Palomino, estudiante de Ingeniería de Software y Full-Stack Developer.
 
@@ -146,9 +144,13 @@ INSTRUCCIONES DE RESPUESTA:
 - Proporciona enlaces cuando sean relevantes (portfolio, GitHub, LinkedIn, proyectos)
 - Enfatiza su enfoque en código limpio, seguridad y buenas prácticas`;
 
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY!
+});
+
 export async function POST(request: NextRequest) {
   try {
-    const { message } = await request.json();
+    const { message, history = [] } = await request.json();
 
     if (!message) {
       return NextResponse.json(
@@ -157,20 +159,44 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    // Construir mensajes con formato de Groq
+    const messages = [
+      {
+        role: 'system',
+        content: PORTFOLIO_CONTEXT
+      },
+      // Agregar historial de conversación si existe
+      ...history.map((msg: any) => ({
+        role: msg.role === 'user' ? 'user' : 'assistant',
+        content: msg.content
+      })),
+      // Agregar mensaje actual del usuario
+      {
+        role: 'user',
+        content: message
+      }
+    ];
 
-    const prompt = `${PORTFOLIO_CONTEXT}\n\nUsuario: ${message}\n\nAsistente de Alex:`;
+    const completion = await groq.chat.completions.create({
+      messages: messages,
+      model: 'llama-3.3-70b-versatile',
+      temperature: 0.7,
+      max_tokens: 1024,
+      top_p: 1,
+      stream: false,
+    });
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
+    const text = completion.choices[0]?.message?.content || 'Error al generar respuesta';
 
     return NextResponse.json({ response: text });
 
   } catch (error) {
     console.error('Error:', error);
     return NextResponse.json(
-      { error: 'Failed to generate response' },
+      { 
+        error: 'Failed to generate response',
+        response: 'Lo siento, hubo un error de conexión. Por favor intenta de nuevo más tarde.'
+      },
       { status: 500 }
     );
   }
