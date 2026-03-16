@@ -16,7 +16,7 @@ const projects = [
     description:
       "Corporate website with investment simulator. Developed with React, TailwindCSS, and backend integration.",
     tech: ["React", "TailwindCSS", "JavaScript"],
-    link: "https://www.panelplussolar.com/",
+    link: "https://www.panelplussolar.com.co/",
   },
   {
     title: "FlyTours SaaS",
