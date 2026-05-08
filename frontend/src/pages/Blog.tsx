@@ -1,119 +1,168 @@
-// frontend/src/components/Blog.tsx
+// frontend/src/pages/Blog.tsx
+import Icons from '../components/Icons';
+
 const events = [
-    {
-        title: "Colombia 4.0",
-        date: "September 11–14, 2025",
-        location: "Bogotá, Colombia",
-        description:
-        "Attended Colombia 4.0, one of the most important technology and innovation events in Latin America. Explored talks on software development, AI, and cybersecurity.",
-        link: "https://col40.co/",
-        image: "/images/colombia40.jpeg",
-    },
-    {
-        title: "University Hackathon",
-        date: "May 16–17, 2024",
-        location: "Universidad Fundación Escuela Tecnológica Jesús Oviedo Pérez",
-        description:
-        "Participated in a 48-hour hackathon, developing solutions with my team for real-world problems. Focused on software engineering practices and teamwork.",
-        link: "https://www.facebook.com/share/v/1FXpr9AeGv/?mibextid=wwXIfr",
-        image: "/images/hackathon-mayo.jpeg",
-    },
-    {
-        title: "University Hackathon",
-        date: "Nov 14, 2024",
-        location: "Universidad Fundación Escuela Tecnológica Jesús Oviedo Pérez",
-        description:
-        "Second participation in the university hackathon, where we worked on innovative digital solutions and improved my leadership and problem-solving skills.",
-        link: "https://www.facebook.com/share/p/19wLgSpHPR/?mibextid=wwXIfr",
-        image: "/images/hackathon-nov.png",
-    },
-        {
-    title: "University Science & Technology Fair",
+  {
+    title: "Colombia 4.0",
+    date: "Sep 11–14, 2025",
+    location: "Bogotá, Colombia",
+    tag: "Tech Conference",
+    tagColor: "bg-blue-600/30 text-blue-300 border-blue-500/30",
+    description:
+      "Attended Colombia 4.0, one of the most important technology and innovation events in Latin America. Explored talks on software development, AI, and cybersecurity.",
+    link: "https://col40.co/",
+    image: "/images/colombia40.jpeg",
+  },
+  {
+    title: "University Hackathon #1",
+    date: "May 16–17, 2024",
+    location: "FETJOP University, Neiva",
+    tag: "Hackathon",
+    tagColor: "bg-purple-600/30 text-purple-300 border-purple-500/30",
+    description:
+      "Participated in a 48-hour hackathon, developing solutions with my team for real-world problems. Focused on software engineering practices and teamwork under pressure.",
+    link: "https://www.facebook.com/share/v/1FXpr9AeGv/?mibextid=wwXIfr",
+    image: "/images/hackathon-mayo.jpeg",
+  },
+  {
+    title: "University Hackathon #2",
+    date: "Nov 14, 2024",
+    location: "FETJOP University, Neiva",
+    tag: "Hackathon",
+    tagColor: "bg-purple-600/30 text-purple-300 border-purple-500/30",
+    description:
+      "Second participation in the university hackathon. Worked on innovative digital solutions and improved leadership and problem-solving skills in competitive conditions.",
+    link: "https://www.facebook.com/share/p/19wLgSpHPR/?mibextid=wwXIfr",
+    image: "/images/hackathon-nov.png",
+  },
+  {
+    title: "Huila Science & Tech Fair",
     date: "Oct 16, 2025",
     location: "Oasis Plaza Mall, Neiva, Huila",
+    tag: "Innovation Fair",
+    tagColor: "bg-cyan-600/30 text-cyan-300 border-cyan-500/30",
     description:
-        "Participation in the Huila University Fair of Science, Technology and Innovation. Showcased innovative projects and connected with students, entrepreneurs, and tech professionals from the region.",
-    link: "https://www.facebook.com/share/p/1RhWT6maro/?mibextid=wwXIfr", 
+      "Participated in the Huila University Fair of Science, Technology and Innovation. Showcased innovative projects and connected with students, entrepreneurs, and tech professionals from the region.",
+    link: "https://www.facebook.com/share/p/1RhWT6maro/?mibextid=wwXIfr",
     image: "/images/feriatec.jpeg",
-    },
-    {
-        title: "Tech Fairs & Electronics Projects",
-        date: "2024 – 2025",
-        location: "Neiva, Colombia",
-        description:
-        "Showcased electronic projects and prototypes at different technology fairs, applying electronics and telecommunication knowledge.",
-        link: "https://www.facebook.com/share/p/1CccoviLwz/?mibextid=wwXIfr",
-        image: "/images/feria-tecnologia.JPG",
-    },
-    ];
+  },
+  {
+    title: "Tech Fairs & Electronics",
+    date: "2024 – 2025",
+    location: "Neiva, Colombia",
+    tag: "Electronics",
+    tagColor: "bg-green-600/30 text-green-300 border-green-500/30",
+    description:
+      "Showcased electronic projects and prototypes at multiple technology fairs, applying electronics and telecommunication knowledge gained from the technical diploma program.",
+    link: "https://www.facebook.com/share/p/1CccoviLwz/?mibextid=wwXIfr",
+    image: "/images/feria-tecnologia.JPG",
+  },
+];
 
-    function Blog() {
-    return (
-        <section className="p-6 md:p-10 border border-gray-700 rounded-lg bg-gray-700 text-white">
-    <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left flex items-center gap-3 justify-center md:justify-start">
-    <svg
-        className="w-7 h-7 md:w-8 md:h-8"
-        viewBox="0 0 24 24"
-        fill="none"
-    >
-        <path
-        d="M19 20H5C3.89543 20 3 19.1046 3 18V6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6V18C21 19.1046 20.1046 20 19 20Z"
-        fill="url(#blogGradient)"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        />
-        <path d="M7 8H17M7 12H17M7 16H13" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <defs>
-        <linearGradient id="blogGradient" x1="3" y1="4" x2="21" y2="20">
-            <stop stopColor="#3b82f6" />
-            <stop offset="1" stopColor="#6366f1" />
-        </linearGradient>
-        </defs>
-    </svg>
-    Blog & Events
-    </h1>
+function Blog() {
+  return (
+    <section className="p-6 md:p-10 border border-gray-700/50 rounded-xl bg-gray-800/40 text-white">
 
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {events.map((event) => (
-            <div
-                key={event.title + event.date}
-                className="bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition"
-            >
-                {event.image && (
+      {/* Header */}
+      <div className="animate-fade-in-up flex items-center gap-3 mb-2">
+        <Icons.BookOpen className="w-8 h-8" />
+        <h1 className="text-2xl md:text-3xl font-bold">
+          <span className="gradient-text">Blog & Events</span>
+        </h1>
+      </div>
+      <p className="animate-fade-in-up delay-100 text-gray-400 text-sm mb-8">
+        Eventos, hackathons y ferias tecnológicas en los que he participado
+      </p>
+
+      {/* Stats bar */}
+      <div className="animate-fade-in-up delay-150 grid grid-cols-3 gap-3 mb-8">
+        {[
+          { label: 'Eventos', value: '5+', color: 'text-blue-400' },
+          { label: 'Hackathons', value: '2', color: 'text-purple-400' },
+          { label: 'Ciudades', value: '2', color: 'text-cyan-400' },
+        ].map(s => (
+          <div key={s.label} className="glass rounded-xl p-3 text-center card-hover">
+            <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
+            <p className="text-xs text-gray-400 mt-1">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Event cards grid */}
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+        {events.map((event, i) => (
+          <div
+            key={event.title + event.date}
+            className="animate-fade-in-up card-hover glass rounded-xl overflow-hidden border border-gray-700/40 group"
+            style={{ animationDelay: `${0.2 + i * 0.1}s` }}
+          >
+            {/* Image */}
+            {event.image && (
+              <div className="relative overflow-hidden h-44">
                 <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-36 md:h-48 object-cover"
+                  src={event.image}
+                  alt={event.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                )}
-                <div className="p-4 md:p-6">
-                <h3 className="text-lg md:text-xl font-bold mb-2">
-                    {event.title}
-                </h3>
-                <p className="text-xs md:text-sm text-gray-400 mb-2">
-                    {event.date} • {event.location}
-                </p>
-                <p className="text-sm md:text-base text-gray-300 mb-4">
-                    {event.description}
-                </p>
-                {event.link && (
-                    <a
-                    href={event.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-blue-400 hover:underline text-sm md:text-base"
-                    >
-                    🔗 More info
-                    </a>
-                )}
-                </div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
+                {/* Tag overlaid on image */}
+                <span className={`absolute top-3 left-3 text-xs px-2.5 py-1 rounded-full border font-medium ${event.tagColor}`}>
+                  {event.tag}
+                </span>
+              </div>
+            )}
+
+            {/* Content */}
+            <div className="p-5">
+              <h3 className="text-base md:text-lg font-bold mb-2 text-white group-hover:text-blue-300 transition-colors">
+                {event.title}
+              </h3>
+
+              {/* Meta */}
+              <div className="flex flex-wrap items-center gap-3 mb-3 text-xs text-gray-400">
+                <span className="flex items-center gap-1">
+                  <Icons.Calendar className="w-3.5 h-3.5" />
+                  {event.date}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Icons.MapPin className="w-3.5 h-3.5" />
+                  {event.location}
+                </span>
+              </div>
+
+              <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                {event.description}
+              </p>
+
+              {event.link && (
+                <a
+                  href={event.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors group/link"
+                >
+                  <Icons.ExternalLink className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                  Ver más
+                </a>
+              )}
             </div>
-            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Footer note */}
+      <div className="animate-fade-in-up delay-700 mt-8 glass rounded-xl p-5 text-center border border-blue-500/20">
+        <div className="flex justify-center mb-2">
+          <Icons.Zap className="w-6 h-6" />
         </div>
-        </section>
-    );
+        <p className="text-gray-300 text-sm">
+          Siempre aprendiendo y conectando con la comunidad tech de Colombia.
+        </p>
+        <p className="text-gray-500 text-xs mt-1">Más eventos próximamente 🚀</p>
+      </div>
+    </section>
+  );
 }
 
 export default Blog;
