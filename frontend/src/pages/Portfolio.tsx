@@ -132,14 +132,17 @@ function Portfolio() {
           >
             {/* Background: video, image, or gradient */}
             {project.video ? (
-              <video
-                src={project.video}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105"
-              />
+              <>
+                <div className="absolute inset-0 bg-gray-900" />
+                <video
+                  src={project.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-contain transition-transform duration-500 md:group-hover:scale-105"
+                />
+              </>
             ) : project.image ? (
               <img
                 src={project.image}
