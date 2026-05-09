@@ -5,6 +5,7 @@ import Icons from "../components/Icons";
 interface Project {
   title: string;
   image: string;
+  video?: string;
   gradient: string;
   emoji: string;
   badge?: string;
@@ -16,8 +17,22 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Duvcore Technology — E-commerce",
+    image: "",
+    video: "/videos/duvcore.mp4",
+    gradient: "from-cyan-900 via-violet-900 to-indigo-900",
+    emoji: "🖥️",
+    badge: "NEW",
+    badgeColor: "bg-cyan-600",
+    description:
+      "Full e-commerce platform for a Colombian tech brand. StockUp API integration for inventory & checkout, scroll-driven PC assembly animation (154 frames), AI chatbot powered by Groq, TikTok blog feed via Apify, Vercel Edge Config, and a custom PC simulator.",
+    tech: ["Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "Groq AI", "StockUp API"],
+    link: "https://duvcore-technology.vercel.app/",
+  },
+  {
     title: "StockUp — AI SaaS E-commerce",
-    image: "/images/stockup.png",
+    image: "",
+    video: "/videos/stockup.mp4",
     gradient: "from-blue-900 via-indigo-900 to-purple-900",
     emoji: "🛒",
     badge: "FEATURED",
@@ -41,7 +56,8 @@ const projects: Project[] = [
   },
   {
     title: "Coffee Masfred",
-    image: "/images/coffee-masfred.png",
+    image: "",
+    video: "/videos/coffee-masfred.mp4",
     gradient: "from-amber-900 via-orange-900 to-yellow-900",
     emoji: "☕",
     description:
@@ -51,7 +67,8 @@ const projects: Project[] = [
   },
   {
     title: "Frutaza E-commerce",
-    image: "/images/frutaza.png",
+    image: "",
+    video: "/videos/frutaza.mp4",
     gradient: "from-green-900 via-emerald-900 to-lime-900",
     emoji: "🍇",
     description:
@@ -61,7 +78,8 @@ const projects: Project[] = [
   },
   {
     title: "Panel Plus Solar",
-    image: "/images/panelplus.png",
+    image: "",
+    video: "/videos/panelplus.mp4",
     gradient: "from-yellow-900 via-amber-900 to-orange-900",
     emoji: "☀️",
     description:
@@ -101,7 +119,7 @@ function Portfolio() {
         <span className="gradient-text">Portfolio</span>
       </h1>
       <p className="animate-fade-in-up delay-100 text-gray-400 text-sm mb-8 text-center md:text-left">
-        {projects.length} proyectos — click o hover para ver detalles
+        {projects.length} projects — click or hover to see details
       </p>
 
       <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-7xl mx-auto">
@@ -112,8 +130,17 @@ function Portfolio() {
             style={{ animationDelay: `${index * 0.1}s` }}
             onClick={() => setOpenCard(openCard === index ? null : index)}
           >
-            {/* Background: image or gradient */}
-            {project.image ? (
+            {/* Background: video, image, or gradient */}
+            {project.video ? (
+              <video
+                src={project.video}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-105"
+              />
+            ) : project.image ? (
               <img
                 src={project.image}
                 alt={project.title}

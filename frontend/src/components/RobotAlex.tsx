@@ -11,13 +11,12 @@ interface Props {
   onRobotClick: () => void;
 }
 
-// ── Path: x × y (viewport %) ──────────────────────────────────────────────
-// x range 70-86 keeps the robot on the right without crowding the sidebar
+// ── Path: horizontal only — robot walks left/right along the bottom ────────
 const PATH: Pos[] = [
-  { x: 82, y: 76 }, { x: 73, y: 54 }, { x: 80, y: 36 },
-  { x: 72, y: 68 }, { x: 85, y: 44 }, { x: 76, y: 26 },
-  { x: 70, y: 74 }, { x: 83, y: 50 }, { x: 74, y: 32 },
-  { x: 79, y: 82 }, { x: 71, y: 50 },
+  { x: 10, y: 0 }, { x: 25, y: 0 }, { x: 42, y: 0 },
+  { x: 58, y: 0 }, { x: 72, y: 0 }, { x: 85, y: 0 },
+  { x: 68, y: 0 }, { x: 50, y: 0 }, { x: 33, y: 0 },
+  { x: 18, y: 0 }, { x: 80, y: 0 },
 ];
 
 // ── Section-aware fact bank ────────────────────────────────────────────────
@@ -164,10 +163,10 @@ export default function RobotAlex({ activePage, onRobotClick }: Props) {
     <div
       style={{
         position: 'fixed',
-        left: `${pos.x}vw`,
-        top:  `${pos.y}vh`,
-        transform: 'translate(-50%, -50%)',
-        transition: 'left 1.3s cubic-bezier(.4,0,.2,1), top 1.3s cubic-bezier(.4,0,.2,1)',
+        left:   `${pos.x}vw`,
+        bottom: '1.5rem',
+        transform: 'translateX(-50%)',
+        transition: 'left 1.3s cubic-bezier(.4,0,.2,1)',
         zIndex: 40,
         userSelect: 'none',
       }}
@@ -222,7 +221,7 @@ export default function RobotAlex({ activePage, onRobotClick }: Props) {
           onClick={() => { onRobotClick(); doJump(); }}
           onKeyDown={e => e.key === 'Enter' && onRobotClick()}
           className={`
-            relative w-16 h-20
+            relative w-10 h-12
             cursor-pointer pointer-events-auto
             ${pose === 'walk'  ? 'robot-walk'  : ''}
             ${pose === 'idle'  ? 'robot-idle'  : ''}
