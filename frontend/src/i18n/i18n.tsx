@@ -5,8 +5,8 @@ import {
 } from "./core";
 
 const TITULO: Record<Lang, string> = {
-  es: "Alex Felipe Rodríguez — Desarrollador Full-Stack e Ingeniero de IA",
-  en: "Alex Felipe Rodríguez — Full-Stack Developer & AI Engineer",
+  es: "Alex Felipe Rodríguez — Desarrollador Full-Stack, IA y automatización",
+  en: "Alex Felipe Rodríguez — Full-Stack Developer, AI & automation",
 };
 
 const DESCRIPCION: Record<Lang, string> = {

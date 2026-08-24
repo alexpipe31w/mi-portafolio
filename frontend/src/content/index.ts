@@ -11,9 +11,12 @@ import type { Bi } from "../i18n/core";
 
 export const perfil = {
   nombre: "Alex Felipe Rodríguez P.",
+  /* "Ingeniero de IA" no: es un título que no está expedido. Esto describe
+     lo que hace de verdad — desarrollar, e implementar IA y automatización
+     dentro de lo que desarrolla. */
   rol: {
-    es: "Desarrollador Full-Stack e Ingeniero de IA",
-    en: "Full-Stack Developer & AI Engineer",
+    es: "Desarrollador Full-Stack · IA y automatización",
+    en: "Full-Stack Developer · AI & automation",
   } satisfies Bi,
   ubicacion: { es: "Neiva, Colombia", en: "Neiva, Colombia" } satisfies Bi,
   email: "alexpipe31w@gmail.com",
