@@ -31,7 +31,7 @@ export const UI = {
   "nav.contact":   { es: "Contacto",    en: "Contact"   },
 
   // Sidebar
-  "side.available":  { es: "Disponible para proyectos",  en: "Available for work" },
+  "side.available":  { es: "Disponible para freelance",  en: "Available for freelance" },
   "side.stack":      { es: "Stack",                      en: "Stack"              },
   "side.languages":  { es: "Idiomas",                    en: "Languages"          },
   "side.cv":         { es: "Descargar CV",               en: "Download CV"        },
