@@ -1,155 +1,185 @@
-// frontend/src/pages/About.tsx
-import Skills from "../components/skills_temp";
-import Icons from "../components/Icons";
+import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import { perfil, cifras, areas, proyectos, stack } from "../content";
+import { useT } from "../i18n/core";
+import { useReveal } from "../hooks/useReveal";
+import ProjectCard from "../components/ProjectCard";
+import type { Seccion } from "../components/Nav";
 
-const workAreas = [
-  {
-    icon: <Icons.Robot className="w-5 h-5 flex-shrink-0" />,
-    title: "AI Agents & Automation",
-    desc: "Building intelligent agents and automation workflows with n8n, LangChain, Groq, and multi-LLM orchestration. Connecting systems to work autonomously at scale.",
-    gradient: "from-cyan-900/40 to-blue-900/40",
-    border: "border-cyan-600/30",
-  },
-  {
-    icon: <Icons.Cart className="w-5 h-5 flex-shrink-0" />,
-    title: "AI-Powered E-commerce SaaS",
-    desc: "Developing multitenant SaaS platforms like StockUp with AI analytics, email marketing automation, inventory management, and payment integrations.",
-    gradient: "from-purple-900/40 to-indigo-900/40",
-    border: "border-purple-600/30",
-  },
-  {
-    icon: <Icons.Chat className="w-5 h-5 flex-shrink-0" />,
-    title: "WhatsApp CRM & Messaging",
-    desc: "Creating WhatsApp-connected platforms for automated customer intake, order management, appointment scheduling, and AI-driven conversation flows.",
-    gradient: "from-green-900/40 to-teal-900/40",
-    border: "border-green-600/30",
-  },
-  {
-    icon: <Icons.Flask className="w-5 h-5 flex-shrink-0" />,
-    title: "AI Testing & QA Automation",
-    desc: "Automated testing pipelines using AI, Postman, Cypress, and JMeter. API security testing with OWASP tools and intelligent test case generation.",
-    gradient: "from-orange-900/40 to-red-900/40",
-    border: "border-orange-600/30",
-  },
-  {
-    icon: <Icons.Code className="w-5 h-5 flex-shrink-0" />,
-    title: "Full-Stack Web Development",
-    desc: "Modern interfaces and APIs with React, Next.js, Node.js, NestJS, and TypeScript. Responsive design, real-time features with Socket.io, and optimized performance.",
-    gradient: "from-blue-900/40 to-violet-900/40",
-    border: "border-blue-600/30",
-  },
-  {
-    icon: <Icons.Gear className="w-5 h-5 flex-shrink-0" />,
-    title: "Systems & Networks Support",
-    desc: "Professional technician in IT systems and networks. Linux administration, Docker infrastructure, network configuration, and hardware/software support.",
-    gradient: "from-gray-800/60 to-slate-900/60",
-    border: "border-gray-600/30",
-  },
-];
+export default function About({ ir }: { ir: (s: Seccion) => void }) {
+  const { t, pick } = useT();
+  const heroRef = useReveal<HTMLDivElement>();
+  const areasRef = useReveal<HTMLDivElement>();
+  const stackRef = useReveal<HTMLDivElement>();
 
-function About() {
+  const destacados = proyectos.filter((p) => p.destacado);
+
   return (
-    <section className="p-6 md:p-10 border border-gray-700/50 rounded-xl bg-gray-800/40 text-white">
+    <div className="pb-24">
+      {/* ── Portada ───────────────────────────────────────────────────
+          Un titular que dice qué construye, la prueba en números justo
+          debajo, y dos acciones. Antes esto era "About Me" en degradado
+          con brillo animado: bonito de lejos, vacío de cerca. */}
+      <section ref={heroRef} className="reveal pt-14 lg:pt-20">
+        <h2 className="t-display max-w-[19ch]">{pick(perfil.titular)}</h2>
 
-      {/* Hero intro */}
-      <div className="animate-fade-in-up mb-8 md:mb-10">
-        <h1 className="text-2xl md:text-4xl font-bold mb-3 text-center md:text-left">
-          <span className="gradient-text">About Me</span>
-        </h1>
-        <p className="text-gray-300 leading-relaxed text-sm md:text-base text-center md:text-left max-w-3xl">
-          I'm a{" "}
-          <span className="font-semibold text-blue-400">Full-Stack Developer & AI Specialist</span>{" "}
-          and certified{" "}
-          <span className="font-semibold text-cyan-400">
-            Técnico Profesional en Soporte de Sistemas Informáticos y Redes
-          </span>
-          . I build intelligent systems that automate real business processes — from multitenant
-          SaaS platforms and WhatsApp CRMs to AI-powered e-commerce and automated testing pipelines.
-          I specialize in{" "}
-          <span className="font-semibold text-purple-400">AI agents, n8n automation, React, Node.js</span>
-          {" "}and modern cloud architectures. Currently in Neiva, Colombia — open to remote work worldwide.
+        <p
+          className="mt-6 max-w-[62ch] leading-relaxed"
+          style={{ fontSize: "var(--step-1)", color: "var(--color-ink-2)" }}
+        >
+          {pick(perfil.intro)}
         </p>
-      </div>
 
-      {/* Featured projects */}
-      <div className="animate-fade-in-up delay-100 mb-8 md:mb-10">
-        <h2 className="text-xl md:text-2xl font-semibold mb-4 flex items-center gap-2 justify-center md:justify-start">
-          <Icons.Rocket className="w-6 h-6" />
-          Featured Projects
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-          {/* StockUp */}
-          <div className="relative bg-gradient-to-br from-blue-900/60 to-purple-900/60 p-5 md:p-6 rounded-xl shadow-lg border border-blue-500/40 neon-border overflow-hidden">
-            <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-blue-600 text-white text-xs px-2.5 py-1 rounded-full font-bold animate-float">
-              <Icons.Star className="w-3 h-3" />
-              FEATURED
-            </div>
-            <h3 className="font-bold text-lg mb-2 text-blue-400">StockUp — AI SaaS Platform</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Multitenant SaaS e-commerce platform for SMBs. AI-powered analytics, automated email
-              marketing campaigns, inventory management, subscription plans (BASIC/PRO/ENTERPRISE),
-              Mercado Pago integration, and advanced multi-carrier shipping.
-            </p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {["Next.js", "Groq AI", "Prisma", "PostgreSQL"].map(t => (
-                <span key={t} className="text-xs bg-blue-800/60 border border-blue-500/30 text-blue-200 px-2 py-1 rounded-full">{t}</span>
-              ))}
-            </div>
-          </div>
-
-          {/* StockUp Mensajes */}
-          <div className="relative bg-gradient-to-br from-green-900/60 to-teal-900/60 p-5 md:p-6 rounded-xl shadow-lg border border-green-500/40 overflow-hidden">
-            <div className="absolute top-3 right-3 bg-green-600 text-white text-xs px-2.5 py-1 rounded-full font-bold">
-              NEW
-            </div>
-            <h3 className="font-bold text-lg mb-2 text-green-400">StockUp Mensajes — WhatsApp CRM</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              WhatsApp-connected platform for automated customer intake, order taking, appointment
-              scheduling, and AI-driven conversation management. Real-time with Socket.io, multi-tenant,
-              powered by Groq AI and Baileys.
-            </p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {["NestJS", "Groq AI", "Baileys", "Socket.io"].map(t => (
-                <span key={t} className="text-xs bg-green-800/60 border border-green-500/30 text-green-200 px-2 py-1 rounded-full">{t}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* What I do */}
-      <h2 className="text-xl md:text-2xl font-semibold mb-4 flex items-center gap-2 justify-center md:justify-start animate-fade-in-up delay-200">
-        <Icons.Zap className="w-6 h-6" />
-        What I Do
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {workAreas.map((area, i) => (
-          <div
-            key={area.title}
-            className={`
-              animate-fade-in-up card-hover
-              bg-gradient-to-br ${area.gradient}
-              border ${area.border}
-              p-4 md:p-5 rounded-xl shadow text-sm md:text-base
-            `}
-            style={{ animationDelay: `${0.25 + i * 0.1}s` }}
+        <div className="mt-9 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={() => ir("work")}
+            className="press inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[0.9375rem] font-semibold transition-colors duration-150"
+            style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--color-accent-hi)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "var(--color-accent)"; }}
           >
-            <h3 className="font-bold text-base mb-2 flex items-center gap-2">
-              {area.icon}
-              {area.title}
-            </h3>
-            <p className="text-gray-400 leading-relaxed">{area.desc}</p>
-          </div>
-        ))}
-      </div>
+            {t("about.seeAll")}
+            <FiArrowRight className="w-4 h-4" />
+          </button>
 
-      {/* Skills */}
-      <div className="mt-10 animate-fade-in-up delay-500">
-        <Skills />
-      </div>
-    </section>
+          <button
+            type="button"
+            onClick={() => ir("contact")}
+            className="press lift inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[0.9375rem] font-medium"
+            style={{ border: "1px solid var(--color-line-2)", color: "var(--color-ink-2)" }}
+          >
+            {t("contact.title")}
+          </button>
+        </div>
+
+        {/* Cifras. Cada una sale de datos reales de esta misma página. */}
+        <dl
+          className="mt-12 grid grid-cols-3 gap-6 max-w-lg pt-8"
+          style={{ borderTop: "1px solid var(--color-line)" }}
+        >
+          {cifras.map((c) => (
+            <div key={c.valor}>
+              <dt className="sr-only">{pick(c.etiqueta)}</dt>
+              <dd>
+                <span
+                  className="block font-semibold"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "1.875rem",
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {c.valor}
+                </span>
+                <span
+                  className="block mt-2 text-[0.8125rem] leading-snug"
+                  style={{ color: "var(--color-ink-3)" }}
+                >
+                  {pick(c.etiqueta)}
+                </span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* ── Trabajo destacado ─────────────────────────────────────── */}
+      <section className="mt-24 lg:mt-32">
+        <header className="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <p className="t-label">{t("about.selected")}</p>
+            <h3 className="t-section mt-2">
+              {pick({ es: "Dos que enseñan mejor cómo trabajo", en: "Two that show best how I work" })}
+            </h3>
+          </div>
+          <button
+            type="button"
+            onClick={() => ir("work")}
+            className="press inline-flex items-center gap-1.5 text-[0.875rem] font-medium transition-colors duration-150"
+            style={{ color: "var(--color-accent)" }}
+          >
+            {t("about.seeAll")}
+            <FiArrowUpRight className="w-4 h-4" />
+          </button>
+        </header>
+
+        <div className="mt-8 space-y-6">
+          {destacados.map((p, i) => (
+            <ProjectCard key={p.id} proyecto={p} ancho delay={i * 70} />
+          ))}
+        </div>
+      </section>
+
+      {/* ── Qué hago ──────────────────────────────────────────────────
+          Seis áreas separadas por líneas y numeradas, no seis cajas de
+          seis colores. La numeración da orden de lectura; el color se
+          reserva para las acciones. */}
+      <section ref={areasRef} className="reveal mt-24 lg:mt-32">
+        <p className="t-label">{t("about.lede")}</p>
+        <h3 className="t-section mt-2 max-w-[24ch]">
+          {pick({
+            es: "De la idea al sistema que funciona solo",
+            en: "From the idea to a system that runs itself",
+          })}
+        </h3>
+
+        <div className="mt-10 grid md:grid-cols-2 gap-x-12">
+          {areas.map((a, i) => (
+            <article
+              key={a.id}
+              className="py-6 flex gap-5"
+              style={{ borderTop: "1px solid var(--color-line)" }}
+            >
+              <span
+                className="shrink-0 pt-1"
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "0.75rem",
+                  color: "var(--color-ink-3)",
+                }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h4
+                  className="font-semibold"
+                  style={{ fontFamily: "var(--font-display)", fontSize: "1.0625rem", letterSpacing: "-0.01em" }}
+                >
+                  {pick(a.titulo)}
+                </h4>
+                <p
+                  className="mt-2 leading-relaxed text-[0.9375rem]"
+                  style={{ color: "var(--color-ink-2)" }}
+                >
+                  {pick(a.desc)}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Stack ─────────────────────────────────────────────────── */}
+      <section ref={stackRef} className="reveal mt-24 lg:mt-32">
+        <p className="t-label">{t("about.stack")}</p>
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {stack.map((s) => (
+            <li
+              key={s}
+              className="px-3 py-1.5 rounded-lg text-[0.8125rem]"
+              style={{
+                fontFamily: "var(--font-mono)",
+                color: "var(--color-ink-2)",
+                background: "var(--color-surface-1)",
+                border: "1px solid var(--color-line)",
+              }}
+            >
+              {s}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
   );
 }
-
-export default About;

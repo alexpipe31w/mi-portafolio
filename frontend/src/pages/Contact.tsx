@@ -1,107 +1,191 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+import { FiMail, FiArrowUpRight, FiCheck, FiAlertCircle } from "react-icons/fi";
+import { FaWhatsapp, FaLinkedin } from "react-icons/fa6";
+import { perfil, redes } from "../content";
+import { useT } from "../i18n/core";
+import { useReveal } from "../hooks/useReveal";
 
-    function Contact() {
-    const [status, setStatus] = useState("");
+const ENDPOINT = "https://mi-portafolio-backend-nxii.onrender.com/send-email";
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
+type Estado = "listo" | "enviando" | "enviado" | "error";
 
-        const data = {
-        name: formData.get("name"),
-        email: formData.get("email"),
-        message: formData.get("message"),
-        };
+export default function Contact() {
+  const { t, pick } = useT();
+  const headRef = useReveal<HTMLElement>();
+  const formRef = useReveal<HTMLDivElement>();
 
-        const res = await fetch("https://mi-portafolio-backend-nxii.onrender.com/send-email", {
+  const [estado, setEstado] = useState<Estado>("listo");
+  const [aviso, setAviso] = useState("");
+
+  const enviar = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (estado === "enviando") return;
+
+    const form = e.currentTarget;
+    const datos = new FormData(form);
+    const name = String(datos.get("name") ?? "").trim();
+    const email = String(datos.get("email") ?? "").trim();
+    const message = String(datos.get("message") ?? "").trim();
+
+    // Validación en el cliente. La de verdad la hace el servidor, pero
+    // decírselo al visitante aquí le ahorra un viaje de ida y vuelta.
+    if (!name || !email || !message) {
+      setEstado("error");
+      setAviso(t("contact.required"));
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setEstado("error");
+      setAviso(t("contact.bademail"));
+      return;
+    }
+
+    setEstado("enviando");
+    setAviso("");
+
+    /* El backend duerme en el plan gratuito de Render y puede tardar en
+       despertar. Sin tope, el botón se queda en "Enviando…" para siempre;
+       con tope, el visitante recibe una salida y los canales directos. */
+    const corte = AbortController ? new AbortController() : null;
+    const reloj = setTimeout(() => corte?.abort(), 15000);
+
+    try {
+      const res = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-        });
+        body: JSON.stringify({ name, email, message }),
+        signal: corte?.signal,
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        const result = await res.json();
-        setStatus(result.msg);
-    };
+      setEstado("enviado");
+      setAviso(t("contact.sent"));
+      form.reset();
+    } catch (err) {
+      // Nunca tragarse el error en silencio: si no llega, hay que decirlo
+      // y ofrecer otra vía, no dejar al visitante esperando.
+      console.error("[contact] no se pudo enviar:", err);
+      setEstado("error");
+      setAviso(t("contact.error"));
+    } finally {
+      clearTimeout(reloj);
+    }
+  };
 
-    return (
-        <section className="p-10 border border-gray-700 rounded-lg bg-gray-700 text-white">
-    <h1 className="text-3xl font-bold mb-6 flex items-center gap-3 justify-center md:justify-start">
-    <svg
-        className="w-8 h-8 md:w-9 md:h-9"
-        viewBox="0 0 24 24"
-        fill="none"
-    >
-        <path
-        d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z"
-        fill="url(#contactGradient)"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        />
-        <defs>
-        <linearGradient id="contactGradient" x1="3" y1="5" x2="21" y2="19">
-            <stop stopColor="#3b82f6" />
-            <stop offset="1" stopColor="#6366f1" />
-        </linearGradient>
-        </defs>
-    </svg>
-    Contact Me
-    </h1>
+  const campo = {
+    background: "var(--color-surface-1)",
+    border: "1px solid var(--color-line-2)",
+    color: "var(--color-ink)",
+  } as const;
 
+  const canales = [
+    { id: "mail", Icon: FiMail, etiqueta: perfil.email, url: `mailto:${perfil.email}` },
+    { id: "wa", Icon: FaWhatsapp, etiqueta: perfil.telefono, url: perfil.whatsapp },
+    { id: "in", Icon: FaLinkedin, etiqueta: "LinkedIn", url: redes.find((r) => r.id === "linkedin")!.url },
+  ];
 
-        {/* Google Maps */}
-        <div className="mb-8">
-            <iframe
-            title="Google Maps"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63753.20634351959!2d-75.31358841561027!3d2.9376186418562944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3b747c5a6b4009%3A0x69acf162bb25539a!2sNeiva%2C%20Huila!5e0!3m2!1ses-419!2sco!4v1758498608380!5m2!1ses-419!2sco"
-            className="w-full h-64 border-0 rounded-lg"
-            loading="lazy"
-            allowFullScreen
-            referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-        </div>
+  return (
+    <div className="pb-24">
+      <header ref={headRef} className="reveal pt-14 lg:pt-20">
+        <h2 className="t-display">{t("contact.title")}</h2>
+        <p
+          className="mt-5 max-w-[52ch] leading-relaxed"
+          style={{ fontSize: "var(--step-1)", color: "var(--color-ink-2)" }}
+        >
+          {t("contact.lede")}
+        </p>
+      </header>
 
-        {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-            <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                className="w-full p-3 rounded bg-gray-800 border border-gray-600 text-white"
-                required
-            />
-            <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                className="w-full p-3 rounded bg-gray-800 border border-gray-600 text-white"
-                required
-            />
+      <div ref={formRef} className="reveal mt-12 grid lg:grid-cols-[1fr_20rem] gap-10 lg:gap-14 items-start">
+        {/* Formulario ─────────────────────────────────────────────── */}
+        <form onSubmit={enviar} noValidate className="surface p-6 lg:p-8">
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div>
+              {/* Etiqueta visible, no solo placeholder: el placeholder
+                  desaparece al escribir y deja el campo sin identificar. */}
+              <label htmlFor="name" className="t-label block mb-2">{t("contact.name")}</label>
+              <input
+                id="name" name="name" type="text" autoComplete="name"
+                className="w-full px-3.5 py-2.5 rounded-lg text-[0.9375rem] outline-none"
+                style={campo}
+              />
             </div>
+            <div>
+              <label htmlFor="email" className="t-label block mb-2">{t("contact.email")}</label>
+              <input
+                id="email" name="email" type="email" autoComplete="email"
+                className="w-full px-3.5 py-2.5 rounded-lg text-[0.9375rem] outline-none"
+                style={campo}
+              />
+            </div>
+          </div>
+
+          <div className="mt-5">
+            <label htmlFor="message" className="t-label block mb-2">{t("contact.message")}</label>
             <textarea
-            name="message"
-            rows={5}
-            placeholder="Your Message"
-            className="w-full p-3 rounded bg-gray-800 border border-gray-600 text-white"
-            required
-            ></textarea>
+              id="message" name="message" rows={6}
+              className="w-full px-3.5 py-2.5 rounded-lg text-[0.9375rem] outline-none resize-y"
+              style={campo}
+            />
+          </div>
+
+          <div className="mt-6 flex items-center gap-4 flex-wrap">
             <button
-            type="submit"
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-lg font-bold w-full md:w-auto"
+              type="submit"
+              disabled={estado === "enviando"}
+              className="press inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[0.9375rem] font-semibold transition-colors duration-150 disabled:opacity-60"
+              style={{ background: "var(--color-accent)", color: "var(--color-accent-ink)" }}
             >
-            Send Message
+              {estado === "enviando" ? t("contact.sending") : t("contact.send")}
             </button>
+
+            {aviso && (
+              <p
+                role="status"
+                aria-live="polite"
+                className="inline-flex items-center gap-2 text-[0.875rem]"
+                style={{ color: estado === "enviado" ? "var(--color-live)" : "oklch(0.70 0.17 25)" }}
+              >
+                {estado === "enviado"
+                  ? <FiCheck className="w-4 h-4 shrink-0" />
+                  : <FiAlertCircle className="w-4 h-4 shrink-0" />}
+                {aviso}
+              </p>
+            )}
+          </div>
         </form>
 
-        {status && (
-            <p className="mt-4 text-green-400 font-semibold flex items-center gap-2">
-            ✅ {status}
-            </p>
-        )}
-        </section>
-    );
-}
+        {/* Canales directos. Sustituyen al mapa de Google que ocupaba media
+            pantalla en verde brillante: a un cliente remoto le sirve más
+            un correo en el que pueda pulsar que ver dónde está Neiva. */}
+        <aside>
+          <p className="t-label">{t("contact.direct")}</p>
+          <ul className="mt-5 space-y-2.5">
+            {canales.map(({ id, Icon, etiqueta, url }) => (
+              <li key={id}>
+                <a
+                  href={url}
+                  target={url.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noreferrer"
+                  className="surface lift press flex items-center gap-3 px-4 py-3 text-[0.875rem]"
+                  style={{ color: "var(--color-ink-2)" }}
+                >
+                  <Icon className="w-4 h-4 shrink-0" style={{ color: "var(--color-ink-3)" }} />
+                  <span className="truncate">{etiqueta}</span>
+                  <FiArrowUpRight className="w-4 h-4 ml-auto shrink-0" style={{ color: "var(--color-ink-3)" }} />
+                </a>
+              </li>
+            ))}
+          </ul>
 
-export default Contact;
+          <p className="mt-6 text-[0.8125rem] leading-relaxed" style={{ color: "var(--color-ink-3)" }}>
+            {pick({
+              es: "Trabajo con clientes de cualquier huso horario. Respondo en menos de 24 horas.",
+              en: "I work with clients in any time zone. I reply within 24 hours.",
+            })}
+          </p>
+        </aside>
+      </div>
+    </div>
+  );
+}

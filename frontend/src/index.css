@@ -1,206 +1,245 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* ═══════════════════════════════════════════════════════════════════════
+   SISTEMA DE DISEÑO
+   Un solo tema: oscuro. No hay variante clara, así que no hay `.dark`
+   ni `color-scheme: light dark` — el tema no es una opción, es la
+   identidad. Todo color, tamaño y curva sale de un token de aquí abajo;
+   si algo necesita un valor suelto, es que falta un token.
+   ═══════════════════════════════════════════════════════════════════════ */
 
-html { color-scheme: light dark; }
-body { @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white; }
+@theme {
+  /* ── Superficies ───────────────────────────────────────────────────
+     Escala de elevación, no de colores sueltos. Cada peldaño se aclara
+     lo justo para leerse por encima del anterior sin bordes gruesos.
+     Gris FRÍO consistente (tinte azul), nunca mezclado con cálido.     */
+  --color-bg:         oklch(0.155 0.008 265);  /* fondo de página        */
+  --color-surface-1:  oklch(0.190 0.010 265);  /* tarjeta en reposo      */
+  --color-surface-2:  oklch(0.225 0.012 265);  /* tarjeta elevada/hover  */
+  --color-surface-3:  oklch(0.270 0.014 265);  /* chips, campos          */
 
-/* ── Keyframe Animations ── */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0);    }
+  /* ── Bordes ────────────────────────────────────────────────────────
+     En oscuro las sombras casi no existen: la jerarquía la marcan el
+     borde y el salto de fondo. Por eso hay tres pesos de borde.        */
+  --color-line:       oklch(0.300 0.012 265);  /* divisoria discreta     */
+  --color-line-2:     oklch(0.380 0.016 265);  /* borde de tarjeta       */
+  --color-line-3:     oklch(0.480 0.020 265);  /* borde en hover/foco    */
+
+  /* ── Texto ─────────────────────────────────────────────────────────
+     Tres niveles. Todos comprobados sobre --color-bg y --color-surface-1
+     para AA: primario 15:1, secundario 7.4:1, terciario 4.6:1.         */
+  --color-ink:        oklch(0.975 0.002 265);
+  --color-ink-2:      oklch(0.790 0.010 265);
+  --color-ink-3:      oklch(0.640 0.012 265);
+
+  /* ── Acento ────────────────────────────────────────────────────────
+     UNO. Se reserva para acción, foco y estado activo: nunca como
+     relleno decorativo. El arcoíris anterior (seis colores compitiendo)
+     es justo lo que esto sustituye.                                    */
+  --color-accent:     oklch(0.680 0.170 258);
+  --color-accent-hi:  oklch(0.760 0.150 258);  /* hover                  */
+  --color-accent-lo:  oklch(0.480 0.140 258);  /* bordes/fondos tenues   */
+  --color-accent-ink: oklch(0.985 0.005 258);  /* texto sobre acento     */
+
+  /* Estado. Solo semántico — disponible, en vivo. Nunca decorativo.    */
+  --color-live:       oklch(0.740 0.170 155);
+
+  /* ── Tipografía ────────────────────────────────────────────────────
+     Tres familias con papel definido: display para titulares, sans para
+     lectura, mono para metadatos técnicos (fechas, stack, etiquetas).  */
+  --font-display: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* ── Curvas ────────────────────────────────────────────────────────
+     Las de serie de CSS son flojas. Estas tienen intención.
+     `ease-in` no aparece en ningún sitio: retrasa el arranque justo
+     cuando el usuario está mirando, y se siente lento.                 */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-@keyframes fadeInLeft {
-  from { opacity: 0; transform: translateX(-28px); }
-  to   { opacity: 1; transform: translateX(0);     }
+/* ── Escala tipográfica ──────────────────────────────────────────────
+   El tracking es específico del tamaño, nunca un valor único para todo:
+   el texto grande se aprieta (las letras se separan ópticamente al
+   crecer) y el pequeño se abre un pelo para que respire.               */
+:root {
+  --step--1: 0.8125rem;   /* 13px — metadatos            */
+  --step-0:  1rem;        /* 16px — cuerpo               */
+  --step-1:  1.125rem;    /* 18px — cuerpo destacado     */
+  --step-2:  1.375rem;    /* 22px — título de tarjeta    */
+  --step-3:  clamp(1.5rem, 2.2vw, 1.875rem);   /* sección */
+  --step-4:  clamp(2rem, 4.2vw, 3.25rem);      /* display */
+
+  color-scheme: dark;
 }
 
-@keyframes fadeInRight {
-  from { opacity: 0; transform: translateX(28px); }
-  to   { opacity: 1; transform: translateX(0);    }
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
-@keyframes glowPulse {
-  0%,100% { box-shadow: 0 0 8px rgba(59,130,246,.45), 0 0 20px rgba(139,92,246,.2); }
-  50%     { box-shadow: 0 0 22px rgba(59,130,246,.8), 0 0 44px rgba(139,92,246,.5); }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
+/* Un fondo plano se ve barato; esto le da profundidad sin distraer.
+   Es estático a propósito: nada de degradados animados de fondo.       */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 12% -10%, oklch(0.30 0.05 262 / 0.30), transparent 60%),
+    radial-gradient(50rem 36rem at 105% 8%,  oklch(0.28 0.04 280 / 0.22), transparent 62%);
 }
 
-@keyframes float {
-  0%,100% { transform: translateY(0);   }
-  50%     { transform: translateY(-6px); }
+/* ── Titulares ───────────────────────────────────────────────────────
+   Jerarquía de peso + tamaño + interlineado como conjunto, no solo
+   tamaño. Interlineado apretado arriba, holgado abajo.                 */
+.t-display {
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.033em;
 }
 
-@keyframes borderGlow {
-  0%,100% { border-color: rgba(59,130,246,.4); }
-  50%     { border-color: rgba(139,92,246,.8);  }
+.t-section {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.022em;
 }
 
-@keyframes badgePop {
-  0%  { opacity: 0; transform: scale(.85); }
-  100%{ opacity: 1; transform: scale(1);   }
+.t-card {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.014em;
 }
 
-/* ── Animation Helpers ── */
-.animate-fade-in-up    { animation: fadeInUp   .65s ease-out both; }
-.animate-fade-in-left  { animation: fadeInLeft .65s ease-out both; }
-.animate-fade-in-right { animation: fadeInRight .65s ease-out both; }
-.animate-glow          { animation: glowPulse 2.8s ease-in-out infinite; }
-.animate-float         { animation: float     3.2s ease-in-out infinite; }
-.animate-badge-pop     { animation: badgePop  .4s ease-out both; }
+/* Etiqueta técnica: mono, pequeña, tracking abierto. Es el recurso que
+   da carácter de "hecho por alguien que programa" sin gritar.          */
+.t-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
 
-.delay-50  { animation-delay: .05s; }
-.delay-100 { animation-delay: .10s; }
-.delay-150 { animation-delay: .15s; }
-.delay-200 { animation-delay: .20s; }
-.delay-250 { animation-delay: .25s; }
-.delay-300 { animation-delay: .30s; }
-.delay-350 { animation-delay: .35s; }
-.delay-400 { animation-delay: .40s; }
-.delay-500 { animation-delay: .50s; }
-.delay-600 { animation-delay: .60s; }
-.delay-700 { animation-delay: .70s; }
-.delay-800 { animation-delay: .80s; }
-.delay-900 { animation-delay: .90s; }
+.t-meta {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: -0.01em;
+  color: var(--color-ink-3);
+}
 
-/* ── Glassmorphism ── */
+/* ── Superficies ─────────────────────────────────────────────────────
+   Borde hairline + salto de fondo. En oscuro esto sustituye a la
+   sombra, que aquí no se ve.                                          */
+.surface {
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+}
+
+/* Cristal para la barra fija: el contenido pasa por debajo.
+   Blur fuerte porque es una superficie grande (las grandes leen como
+   más gruesas que un chip pequeño).                                    */
 .glass {
-  background: rgba(17, 24, 39, .65);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(75, 85, 99, .35);
+  background: oklch(0.175 0.010 265 / 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--color-line);
 }
 
-.glass-light {
-  background: rgba(31, 41, 55, .5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(107, 114, 128, .25);
+/* ── Interacción ─────────────────────────────────────────────────────
+   Propiedades nombradas una a una. Nunca `transition: all`: repinta de
+   más y además transiciona cosas que no querías.                       */
+.lift {
+  transition:
+    border-color 200ms var(--ease-out),
+    background-color 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
 }
 
-/* ── Gradient Text ── */
-.gradient-text {
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3.5s linear infinite;
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-line-3);
+    background: var(--color-surface-2);
+  }
 }
 
-.gradient-text-green {
-  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Respuesta al pulsar: instantánea y en pointer-down, no al soltar.
+   Es lo que hace que la interfaz parezca que te está escuchando.       */
+.press {
+  transition: transform 130ms var(--ease-out);
+}
+.press:active {
+  transform: scale(0.975);
 }
 
-/* ── Neon border ── */
-.neon-border {
-  border: 1px solid rgba(59,130,246,.5);
-  box-shadow: 0 0 12px rgba(59,130,246,.15), inset 0 0 12px rgba(59,130,246,.05);
-  animation: borderGlow 3s ease-in-out infinite;
+/* Foco visible SIEMPRE. Nunca quitar el outline sin sustituirlo.       */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
-/* ── Card hover lift ── */
-.card-hover {
-  transition: transform .25s ease, box-shadow .25s ease;
+/* ── Revelado al scroll ──────────────────────────────────────────────
+   Transición, no keyframes: se puede interrumpir y reorientar. Se
+   dispara una sola vez (el observador deja de observar tras entrar).   */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 520ms var(--ease-out),
+    transform 520ms var(--ease-out);
 }
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 20px rgba(59,130,246,.15);
-}
-
-/* ── Timeline dot glow ── */
-.timeline-dot-blue   { box-shadow: 0 0 8px rgba(59,130,246,.6);  }
-.timeline-dot-yellow { box-shadow: 0 0 8px rgba(234,179,8,.6);   }
-.timeline-dot-green  { box-shadow: 0 0 8px rgba(16,185,129,.6);  }
-
-/* ── RobotAlex Animations ── */
-@keyframes robotJump {
-  0%   { transform: translateY(0)     scaleX(1)    scaleY(1); }
-  12%  { transform: translateY(-4px)  scaleX(1.05) scaleY(.92); }
-  35%  { transform: translateY(-22px) scaleX(.95)  scaleY(1.05); }
-  58%  { transform: translateY(-26px) scaleX(1)    scaleY(1); }
-  74%  { transform: translateY(-9px)  scaleX(1.02) scaleY(.97); }
-  88%  { transform: translateY(-2px)  scaleX(.99)  scaleY(1.02); }
-  100% { transform: translateY(0)     scaleX(1)    scaleY(1); }
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
 }
 
-.robot-jumping { animation: robotJump .75s cubic-bezier(.36,.07,.19,.97) both !important; }
+/* ── Scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-3);
+  border-radius: 99px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-line-3); }
 
-@keyframes robotBob {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  50%     { transform: translateY(-4px) rotate(.5deg); }
-}
-@keyframes robotClimb {
-  0%,100% { transform: rotate(-8deg) translateY(0); }
-  50%     { transform: rotate(8deg) translateY(-3px); }
-}
-@keyframes robotWalk {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(-3px); }
-}
-@keyframes robotLegL {
-  0%,100% { transform-origin: top center; transform: rotate(-18deg); }
-  50%     { transform-origin: top center; transform: rotate(18deg); }
-}
-@keyframes robotLegR {
-  0%,100% { transform-origin: top center; transform: rotate(18deg); }
-  50%     { transform-origin: top center; transform: rotate(-18deg); }
-}
-@keyframes robotArmWave {
-  0%,100% { transform-origin: top left; transform: rotate(0deg); }
-  25%     { transform-origin: top left; transform: rotate(-40deg); }
-  75%     { transform-origin: top left; transform: rotate(10deg); }
-}
-@keyframes robotArmPoint {
-  0%,100% { transform-origin: top left; transform: rotate(-30deg); }
-  50%     { transform-origin: top left; transform: rotate(-60deg); }
-}
-@keyframes antennaPulse {
-  0%,100% { opacity: 1; r: 3.5; }
-  50%     { opacity: .6; r: 5; }
-}
-@keyframes eyeBlink {
-  0%,90%,100% { transform: scaleY(1); }
-  95%          { transform: scaleY(.1); }
-}
-@keyframes ledFlicker {
-  0%,100% { opacity: 1; }
-  50%     { opacity: .5; }
-}
-@keyframes robotParticle {
-  0%   { opacity: .8; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(10px) scale(.3); }
+::selection {
+  background: var(--color-accent-lo);
+  color: var(--color-ink);
 }
 
-/* Robot pose classes */
-.robot-walk   { animation: robotWalk  .5s ease-in-out infinite; }
-.robot-idle   { animation: robotBob   2s ease-in-out infinite; }
-.robot-climb  { animation: robotClimb .6s ease-in-out infinite; }
-.robot-wave   { animation: robotBob   2s ease-in-out infinite; }
-
-.robot-walk   .robot-leg-l { animation: robotLegL .45s ease-in-out infinite; }
-.robot-walk   .robot-leg-r { animation: robotLegR .45s ease-in-out infinite; }
-.robot-climb  .robot-leg-l { animation: robotLegL .35s ease-in-out infinite; }
-.robot-climb  .robot-leg-r { animation: robotLegR .35s ease-in-out infinite; }
-
-.robot-wave   .robot-arm-r { animation: robotArmWave .6s ease-in-out infinite; }
-.robot-point  .robot-arm-r { animation: robotArmPoint .8s ease-in-out infinite; }
-
-.robot-antenna { animation: antennaPulse 1.2s ease-in-out infinite; }
-.robot-eyes    { animation: eyeBlink 4s ease-in-out infinite; }
-.robot-led-c   { animation: ledFlicker 1.8s ease-in-out infinite; }
-.robot-led-g   { animation: ledFlicker 2.4s ease-in-out .3s infinite; }
-.robot-led-p   { animation: ledFlicker 2s ease-in-out .6s infinite; }
-
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar       { width: 6px; }
-::-webkit-scrollbar-track { background: #111827; }
-::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+/* ── Accesibilidad de movimiento ─────────────────────────────────────
+   Movimiento reducido no es "sin respuesta": se quedan opacidad y
+   color, que ayudan a entender; se va el desplazamiento.
+   ESTE BLOQUE VA SIEMPRE EL ÚLTIMO: si algo se añade debajo, lo pisa.  */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
