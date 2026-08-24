@@ -280,6 +280,18 @@ export interface Entrada {
 }
 
 export const experiencia: Entrada[] = [
+  /* El empleo actual va primero: es lo que un reclutador busca antes que
+     nada, y es lo más reciente de la lista. */
+  {
+    titulo: { es: "Soporte y desarrollo TIC — Discolmets", en: "IT support & development — Discolmets" },
+    lugar: { es: "Discolmets · Área de TIC", en: "Discolmets · IT department" },
+    fecha: { es: "Jul 2026 — Actualidad", en: "Jul 2026 — Present" },
+    actual: true,
+    desc: {
+      es: "Doy soporte al ERP con el que opera la compañía: atiendo las incidencias y solicitudes de la plataforma y desarrollo los requerimientos que pide el negocio sobre ella.",
+      en: "I support the ERP the company runs on: I handle the platform's incidents and requests, and build the requirements the business asks for on top of it.",
+    },
+  },
   {
     titulo: { es: "Desarrollador independiente — StockUp", en: "Independent developer — StockUp" },
     lugar: { es: "Producto propio", en: "My own product" },
